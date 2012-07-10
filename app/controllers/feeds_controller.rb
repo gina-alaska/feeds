@@ -18,6 +18,19 @@ class FeedsController < ApplicationController
     end
   end
   
+  def census_county
+    @feed = CensusCounty.all
+    
+    respond_to do |format|
+      format.geojson do
+        render :json => {
+          type: 'FeatureCollection',
+          features: @feed.as_json
+        }
+      end
+    end
+  end
+  
   def poi
     @feed = Poi.active
     if params[:category]
