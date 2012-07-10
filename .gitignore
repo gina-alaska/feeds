@@ -16,3 +16,7 @@
 
 database.yml
 mongoid.yml
+
+config/census.yml
+
+public/census_county.geojson

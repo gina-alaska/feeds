@@ -18,6 +18,7 @@ class FeedsController < ApplicationController
     end
   end
   
+  caches_page :census_county
   def census_county
     @feed = CensusCounty.all
     
@@ -25,7 +26,13 @@ class FeedsController < ApplicationController
       format.geojson do
         render :json => {
           type: 'FeatureCollection',
-          features: @feed.as_json
+          features: @feed.collect do |f|
+            {
+              type: 'Feature',
+              geometry: f.geometry.as_json,
+              properties: CensusAPI.where(:state => f.state, :county => f.county).first
+            }
+          end
         }
       end
     end
