@@ -18,6 +18,20 @@ class FeedsController < ApplicationController
     end
   end
   
+  def modis
+    @feed = RealtimeTile.desc('properties.id').limit(20).all
+    
+    respond_to do |format|
+      format.geojson do
+        index = 0
+        render :json => {
+          type: "FeatureCollection", 
+          features: @feed
+        }
+      end
+    end
+  end
+  
   caches_page :census_county
   def census_county
     @feed = CensusCounty.all
