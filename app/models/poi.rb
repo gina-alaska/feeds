@@ -18,7 +18,8 @@ class Poi < ActiveRecord::Base
     {
       name: self.name,
       category: self.category,
-      url: "<a href=\"#{self.url}\">#{truncated_url}</a>"
+      url: "<a href=\"#{self.url}\">#{truncated_url}</a>",
+      description: self.try(:description)
     }
   end
   
