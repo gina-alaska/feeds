@@ -1,4 +1,4 @@
-class CensusAPI
+class CensusApi
   DEFAULT_FIELDS = {'NAME' => 'Name', 'P0010001' => 'Total Population'}
   
   def self.where(params)
