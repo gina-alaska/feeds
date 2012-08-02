@@ -4,7 +4,8 @@ class RealtimeTile
   field :type,        type: String
   field :properties,  type: Hash
   field :geometry,    type: Hash
-
+  index :type
+  index 'properties.id'
 
   def as_json(*args)
     data = super
