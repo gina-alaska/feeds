@@ -19,7 +19,7 @@ class FeedsController < ApplicationController
   end
   
   def modis
-    @feed = RealtimeTile.desc('properties.id').limit(20).all
+    @feed = RealtimeTile.desc('properties.id').limit(params[:limit] || 20).all
     
     respond_to do |format|
       format.geojson do
@@ -44,7 +44,7 @@ class FeedsController < ApplicationController
             {
               type: 'Feature',
               geometry: f.geometry.as_json,
-              properties: CensusAPI.where(:state => f.state, :county => f.county).first
+              properties: CensusApi.where(:state => f.state, :county => f.county).first
             }
           end
         }
