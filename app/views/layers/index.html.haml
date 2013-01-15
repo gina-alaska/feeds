@@ -1,0 +1,10 @@
+%table.table.table-striped.table-bordered.table-condensed
+  %thead
+    %tr
+      %th Name
+      %th Actions
+  %tbody
+    - @layers.each do |l|
+      %tr
+        %td= l.name
+        %td= link_to l.name, l, class: 'btn'

@@ -1,0 +1,8 @@
+<% cache([geojson, params[:properties], format: 'geojson']) do %>
+{
+  type: <%= geojson.type %>,
+  features: [
+  <%= render partial: 'feature', collection: @features || @layer.features %>
+  ]
+}
+<% end %>
