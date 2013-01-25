@@ -12,7 +12,7 @@ class Geometry
   def self.from_geojson(json)
     json = JSON.parse(json) if json.kind_of? String
     
-    if %w{ Point LineString Polygon }.include?(json['type'])
+    if %w{ Point LineString Polygon MultiPolygon }.include?(json['type'])
       json['type'].constantize.from_geojson(json)
     else
       raise "Unknown geometry type #{json['type']}"

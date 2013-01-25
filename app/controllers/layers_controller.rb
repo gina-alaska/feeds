@@ -20,7 +20,7 @@ class LayersController < ApplicationController
             logger.info tmp.properties[k].class
           end
           
-          @features = @features.where("properties.#{k}" => v)
+          @features = @features.where("properties.#{k}" => /#{v}/i)
         end
       end
     end
