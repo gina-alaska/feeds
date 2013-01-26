@@ -13,14 +13,12 @@ class LayersController < ApplicationController
         if tmp.properties.keys.include? k
           case tmp.properties[k].class.to_s
           when 'Fixnum'
-            v = v.to_i
+            @features = @features.where("properties.#{k}" => v.to_i)
           when 'Float'
-            v = v.to_f
+            @features = @features.where("properties.#{k}" => v.to_f)
           else
-            logger.info tmp.properties[k].class
+            @features = @features.where("properties.#{k}" => /#{v}/i)
           end
-          
-          @features = @features.where("properties.#{k}" => /#{v}/i)
         end
       end
     end
